@@ -1,26 +1,43 @@
-# Procurix
+<div align="center">
 
-**You say what you need to buy. It emails your suppliers, reads their quotes, tells you which to take and why — then makes sure you pay on time, because in India paying a small supplier late now costs you tax.**
+<h1>Procurix</h1>
+
+<h3>Say what you need to buy. It does the rest.</h3>
+
+<p>
+It emails your suppliers, reads their quotes — PDFs, photographs, four lines typed in a reply —<br>
+ranks them on <i>your</i> terms, and then watches the clock, because in India<br>
+paying a small supplier late now costs you the tax deduction.
+</p>
+
+<p>
+<img alt="Agentic AI Hackathon, IIT Bhubaneswar" src="https://img.shields.io/badge/Agentic%20AI%20Hackathon-IIT%20Bhubaneswar-A63C15?style=flat-square">
+<img alt="LangGraph and Gemini" src="https://img.shields.io/badge/agent-LangGraph%20%2B%20Gemini-1E1A14?style=flat-square">
+<img alt="17 agent tools" src="https://img.shields.io/badge/tools-17-6B5F4B?style=flat-square">
+<img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white">
+<img alt="Supabase Postgres" src="https://img.shields.io/badge/Supabase-Postgres-3FCF8E?style=flat-square&logo=supabase&logoColor=white">
+<img alt="Section 43B(h) compliance engine" src="https://img.shields.io/badge/Section%2043B(h)-compliance%20engine-A81F2D?style=flat-square">
+</p>
 
 <br>
 
-## 🎥 Watch the demo
+<a href="https://youtu.be/jzp-LK5PZCg"><img width="720" alt="Watch the Procurix demo" src="https://img.youtube.com/vi/jzp-LK5PZCg/maxresdefault.jpg"></a>
 
-[![Watch the Procurix demo](https://img.youtube.com/vi/jzp-LK5PZCg/maxresdefault.jpg)](https://youtu.be/jzp-LK5PZCg)
-
-**▶ https://youtu.be/jzp-LK5PZCg**
+<p><b>▶ <a href="https://youtu.be/jzp-LK5PZCg">Watch the demo</a></b></p>
 
 <br>
 
----
+<p>
+Built for the <b>Agentic AI Hackathon</b>, Indian Institute of Technology Bhubaneswar<br>
+<b>Team KB Innovator</b> — Nikhil Yadav <i>(IIIT Ranchi)</i> · Kaushik Shahare <i>(Parul University)</i>
+</p>
 
-<br>
+<p>
+<a href="docs/Procurix-KB-Innovator-Round1.pdf"><b>Round 1 brief</b></a> &nbsp;·&nbsp;
+<a href="docs/TECHNICAL.md"><b>Technical documentation</b></a>
+</p>
 
-Built for the **Agentic AI Hackathon**, Indian Institute of Technology Bhubaneswar.
-
-**Team KB Innovator** — Nikhil Yadav (IIIT Ranchi) · Kaushik Shahare (Parul University)
-
-📄 [Round 1 brief (PDF)](docs/Procurix-KB-Innovator-Round1.pdf) · 📘 [Full technical documentation](docs/TECHNICAL.md)
+</div>
 
 ---
 
