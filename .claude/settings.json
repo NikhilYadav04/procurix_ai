@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(grep -rnoE \"text-\\\\[#[0-9a-fA-F]{3,8}\\\\]\" src/pages src/components)",
+      "Bash(node scripts/_demo_summary.js)",
+      "Bash(rm -f scripts/_demo_summary.js)",
+      "Bash(printf '%s\\\\n' '<!DOCTYPE html>' '<html lang=\"en\"><head><meta charset=\"utf-8\">' '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' '<style>html,body{margin:0;padding:0}img{max-width:100%}</style>' '</head><body>')",
+      "Bash(cat procurix-brief.html)",
+      "Bash(printf '%s\\\\n' '</body></html>')",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --no-sandbox --virtual-time-budget=12000 --run-all-compositor-stages-before-draw --print-to-pdf-no-header --no-pdf-header-footer --print-to-pdf=\"Procurix-KB-Innovator-Round1.pdf\" \"file:///C:/Users/DELL/AppData/Local/Temp/claude/n--Dev-Portfolio-Apps-AI-Agent/70c6e845-83ad-4236-b881-a06a89e8e00d/scratchpad/_pdf.html\")",
+      "Bash(find /c/Users/DELL -maxdepth 3 -name \"Procurix-KB-Innovator-Round1.pdf\" -newermt \"-5 minutes\" 2>/dev/null | head -5; echo \"--- also checking cwd variants ---\"; ls -la \"/c/Users/DELL/Procurix-KB-Innovator-Round1.pdf\" 2>/dev/null; ls -la \"n:/Dev/Portfolio Apps/AI Agent/Procurix-KB-Innovator-Round1.pdf\" 2>/dev/null)",
+      "Read(//c/Users/DELL/**)"
+    ]
+  }
+}

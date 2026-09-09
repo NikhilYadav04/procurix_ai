@@ -1,0 +1,589 @@
+<title>Procurix Round 1 Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  color-scheme: light;
+  --bg:     #E8E9EA;
+  --slide:  #FFFFFF;
+  --panel:  #F4F5F6;
+  --ink:    #101317;
+  --ink2:   #3F4853;
+  --ink3:   #79828D;
+  --line:   #DEE1E5;
+  --soft:   #EBEDEF;
+  --rust:   #A63C15;
+  --rustbg: #FAE8E1;
+  --red:    #A81F2D;
+  --redbg:  #FAE3E5;
+  --good:   #106349;
+  --goodbg: #DFEFE9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+
+.deck { max-width: 1180px; margin: 0 auto; padding: 26px 18px 60px; display: grid; gap: 22px; }
+
+.slide {
+  background: var(--slide); border: 1px solid var(--line);
+  border-radius: 12px; padding: 34px 40px;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+@media (min-width: 900px) { .slide { aspect-ratio: 16 / 9; padding: 44px 52px; } }
+
+.pnum {
+  position: absolute; right: 22px; bottom: 16px;
+  font-family: "IBM Plex Mono"; font-size: 11px; color: var(--ink3);
+  letter-spacing: .1em;
+}
+.eyebrow {
+  font-family: "IBM Plex Mono"; font-size: 10.5px; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--rust);
+  margin-bottom: 12px;
+}
+h2.big {
+  font-size: clamp(26px, 3.6vw, 44px); font-weight: 800;
+  letter-spacing: -.032em; line-height: 1.02; margin: 0 0 18px;
+}
+h3.mid { font-size: 17px; font-weight: 700; letter-spacing: -.015em; margin: 0 0 8px; }
+
+/* ---- cover ---- */
+.cover { justify-content: center; }
+.cover .host {
+  font-family: "IBM Plex Mono"; font-size: 11px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 26px;
+}
+.cover .host b { color: var(--rust); }
+.cover h1 {
+  font-size: clamp(52px, 9vw, 108px); font-weight: 900;
+  letter-spacing: -.045em; line-height: .92; margin: 0 0 20px;
+}
+.cover-mid { margin: auto 0; }
+.cover .one {
+  font-size: clamp(17px, 2.1vw, 25px); font-weight: 500; line-height: 1.34;
+  color: var(--ink2); max-width: 34ch; margin: 0 0 26px;
+}
+.cover .one b { color: var(--ink); font-weight: 700; }
+.cover .proof { display: flex; flex-wrap: wrap; gap: 7px; }
+.cover .proof span {
+  font-family: "IBM Plex Mono"; font-size: 11.5px; color: var(--ink2);
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 11px;
+}
+.cover .proof span.hot { background: var(--rustbg); border-color: transparent; color: var(--rust); font-weight: 600; }
+.cover .foot {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: flex-end;
+  margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
+}
+.cover .foot div { font-size: 13.5px; }
+.cover .foot .lbl {
+  font-family: "IBM Plex Mono"; font-size: 9.5px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink3); display: block; margin-bottom: 3px;
+}
+.cover .foot .gh { margin-left: auto; }
+.cover .foot .gh a { color: var(--rust); text-decoration: none; font-family: "IBM Plex Mono"; font-size: 12.5px; }
+
+/* ---- generic layout ---- */
+.cols { display: grid; gap: 20px; flex: 1; min-height: 0; }
+.cols > div { display: flex; flex-direction: column; }
+@media (min-width: 860px) { .cols.two { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 860px) { .cols.narrow-wide { grid-template-columns: 0.82fr 1.18fr; gap: 30px; } }
+
+.tape {
+  margin-top: 16px; padding: 11px 16px; border-radius: 8px;
+  background: var(--redbg); color: var(--red);
+  font-size: 14.5px; font-weight: 600; line-height: 1.35;
+}
+.tape.calm { background: var(--goodbg); color: var(--good); }
+
+/* ---- flow ---- */
+.flow { display: grid; gap: 6px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 700px) { .flow { grid-template-columns: repeat(6, 1fr); } }
+.st {
+  border: 1px solid var(--line); border-radius: 7px;
+  padding: 9px 10px; background: var(--panel);
+}
+.st .n { font-family: "IBM Plex Mono"; font-size: 9px; color: var(--ink3); letter-spacing: .1em; display: block; }
+.st .t { font-size: 12.5px; font-weight: 600; line-height: 1.25; margin-top: 3px; display: block; }
+.st.brk { background: var(--redbg); border-color: var(--red); }
+.st.brk .t, .st.brk .n { color: var(--red); }
+.st.ok { background: var(--goodbg); border-color: var(--good); }
+.st.ok .t, .st.ok .n { color: var(--good); }
+
+/* ---- law ---- */
+.law { display: grid; gap: 7px; }
+.lrow {
+  display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline;
+  padding: 9px 13px; background: var(--panel); border-radius: 7px;
+}
+.lrow b {
+  font-family: "IBM Plex Mono"; font-size: 15px; font-weight: 600;
+  color: var(--rust); white-space: nowrap;
+}
+.lrow span { font-size: 13.5px; color: var(--ink2); line-height: 1.3; }
+
+/* ---- user cards ---- */
+.ucard {
+  border: 1px solid var(--line); border-radius: 9px; padding: 14px 16px;
+  background: var(--panel); margin-bottom: 9px;
+}
+.ucard .r {
+  font-family: "IBM Plex Mono"; font-size: 9.5px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--rust); margin-bottom: 5px;
+}
+.ucard h4 { font-size: 15.5px; font-weight: 700; margin: 0 0 5px; }
+.ucard p { margin: 0; font-size: 13px; color: var(--ink2); line-height: 1.4; }
+
+/* ---- numbered args ---- */
+.args { display: grid; gap: 13px; }
+.arg { display: grid; grid-template-columns: 30px 1fr; gap: 14px; align-items: start; }
+.arg .k {
+  font-size: 25px; font-weight: 800; color: var(--rust); line-height: .95;
+  letter-spacing: -.03em;
+}
+.arg h4 { font-size: 15.5px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.01em; }
+.arg p { margin: 0; font-size: 13.5px; color: var(--ink2); line-height: 1.42; }
+.arg p b { color: var(--ink); font-weight: 600; }
+
+/* ---- principles ---- */
+.prin { display: grid; gap: 8px; }
+@media (min-width: 760px) { .prin { grid-template-columns: repeat(3, 1fr); } }
+.pr {
+  border: 1px solid var(--line); border-left: 3px solid var(--rust);
+  border-radius: 0 8px 8px 0; padding: 11px 14px; background: var(--panel);
+}
+.pr b { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 3px; }
+.pr span { font-size: 12.5px; color: var(--ink2); line-height: 1.35; }
+
+.scope {
+  margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line);
+  font-size: 12.5px; color: var(--ink3); line-height: 1.45;
+}
+.scope b { color: var(--ink2); font-weight: 700; }
+
+/* ---- cost-of-today list (slide 2) ---- */
+.costs { display: grid; gap: 6px; grid-template-columns: 1fr; margin-top: 14px; }
+.cost {
+  display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: baseline;
+  font-size: 12.8px; color: var(--ink2); line-height: 1.35;
+}
+.cost i {
+  font-style: normal; font-family: "IBM Plex Mono"; font-size: 11.5px;
+  font-weight: 600; color: var(--red); white-space: nowrap;
+}
+
+/* ---- user facts (slide 3) ---- */
+.facts { display: grid; gap: 5px; margin-top: 11px; }
+.fct {
+  display: grid; grid-template-columns: 92px 1fr; gap: 10px; align-items: baseline;
+  font-size: 12.5px; color: var(--ink2); line-height: 1.34;
+}
+.fct i {
+  font-style: normal; font-family: "IBM Plex Mono"; font-size: 9.5px;
+  letter-spacing: .11em; text-transform: uppercase; color: var(--ink3);
+}
+
+/* ---- worked example (slide 4) ---- */
+.demo {
+  display: grid; grid-template-columns: 1fr; gap: 7px;
+  margin: 4px 0 14px;
+}
+.demo-row { display: contents; }
+.demo-row .lbl {
+  font-family: "IBM Plex Mono"; font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink3); padding-top: 8px;
+}
+.demo-row .out {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 7px; padding: 8px 13px; font-size: 13.5px; line-height: 1.4;
+  color: var(--ink2);
+}
+.demo-row .out b { color: var(--ink); font-weight: 700; }
+.demo-row.typed .out {
+  background: var(--rustbg); border-color: transparent;
+  color: var(--rust); font-weight: 600;
+}
+.demo-row.result .out {
+  background: var(--goodbg); border-color: transparent; color: var(--good); font-weight: 600;
+}
+.demo-row .out .seq {
+  font-family: "IBM Plex Mono"; font-size: 12px; color: var(--ink3);
+}
+
+.asks { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.asks span {
+  font-family: "IBM Plex Mono"; font-size: 11px; color: var(--ink2);
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 5px; padding: 5px 9px;
+}
+.askhead {
+  font-family: "IBM Plex Mono"; font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 7px;
+}
+
+.stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; }
+.stat {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 7px;
+  padding: 8px 13px;
+}
+.stat b { font-family: "IBM Plex Mono"; font-size: 17px; font-weight: 600; display: block; letter-spacing: -.02em; }
+.stat span { font-size: 11px; color: var(--ink3); }
+
+/* ---- architecture ---- */
+.arch { display: grid; gap: 5px; flex: 1; align-content: start; }
+.lay {
+  border: 1px solid var(--line); border-radius: 7px;
+  padding: 7px 13px; background: var(--panel);
+  display: grid; gap: 2px 14px; grid-template-columns: 1fr;
+}
+@media (min-width: 780px) { .lay { grid-template-columns: 146px 1fr; align-items: center; } }
+.lay.hot { border-color: var(--rust); border-left-width: 3px; background: var(--rustbg); }
+.lay .nm { font-size: 13.5px; font-weight: 700; letter-spacing: -.01em; }
+.lay .nm em { display: block; font-family: "IBM Plex Mono"; font-size: 8.5px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); font-weight: 400; margin-bottom: 1px; }
+.lay .ds { font-size: 11.8px; color: var(--ink2); line-height: 1.32; }
+.lay.hot .ds { color: var(--ink2); }
+.arrow { text-align: center; font-family: "IBM Plex Mono"; font-size: 9px; color: var(--ink3); letter-spacing: .1em; line-height: 1; margin: -1px 0; }
+.trio { display: grid; gap: 6px; }
+@media (min-width: 780px) { .trio { grid-template-columns: repeat(3, 1fr); } }
+.trio .lay { grid-template-columns: 1fr; }
+
+/* ---- impact ---- */
+.tw { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 440px; }
+th, td { text-align: left; padding: 8px 12px; border-top: 1px solid var(--soft); }
+th { font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink3); font-weight: 600; border-top: 0; }
+td.n { font-family: "IBM Plex Mono"; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+td.p { font-family: "IBM Plex Mono"; text-align: right; color: var(--good); font-weight: 600; white-space: nowrap; }
+
+.hero-num {
+  background: var(--redbg); border-radius: 10px; padding: 16px 18px;
+}
+.hero-num b {
+  display: block; font-family: "IBM Plex Mono"; font-size: clamp(30px, 4.4vw, 48px);
+  font-weight: 600; color: var(--red); letter-spacing: -.035em; line-height: 1;
+}
+.hero-num span { display: block; margin-top: 8px; font-size: 13.5px; color: var(--ink2); line-height: 1.38; }
+
+.limits {
+  margin-top: 14px; font-size: 12px; color: var(--ink3); line-height: 1.42;
+  padding-top: 11px; border-top: 1px solid var(--line);
+}
+.limits b { color: var(--ink2); }
+
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  body { background: #FFFFFF; }
+  .deck { max-width: none; margin: 0; padding: 0; gap: 0; display: block; }
+  .slide {
+    border: 0; border-radius: 0; aspect-ratio: auto;
+    width: 297mm; height: 209mm; padding: 13mm 15mm;
+    break-after: page; page-break-after: always; overflow: hidden;
+    background: #FFFFFF;
+  }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+  .st, .lrow, .ucard, .pr, .stat, .lay { background: #F4F5F6; }
+  .st.brk, .hero-num, .tape { background: #FAE3E5; }
+  .st.ok, .tape.calm { background: #DFEFE9; }
+  .lay.hot { background: #FAE8E1; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .cols.two { grid-template-columns: 1fr 1fr; }
+  .cols.narrow-wide { grid-template-columns: 0.82fr 1.18fr; gap: 30px; }
+  .flow { grid-template-columns: repeat(6, 1fr); }
+  .prin { grid-template-columns: repeat(3, 1fr); }
+  .trio { grid-template-columns: repeat(3, 1fr); }
+  .lay { grid-template-columns: 146px 1fr; align-items: center; }
+  .trio .lay { grid-template-columns: 1fr; }
+  .cover h1 { font-size: 92px; }
+  .cover .one { font-size: 21px; }
+  h2.big { font-size: 40px; }
+  .slide[id="s5"] h2.big { font-size: 34px; }
+  .demo { grid-template-columns: 78px 1fr; }
+  .costs { grid-template-columns: 1fr 1fr; }
+  .say, .demo-row .out { background: #F4F5F6; }
+  .demo-row.typed .out { background: #FAE8E1; }
+  .demo-row.result .out { background: #DFEFE9; }
+}
+</style>
+
+<div class="deck">
+
+  <!-- 1 ................................................. -->
+  <section class="slide cover">
+    <div class="host"><b>Agentic AI Hackathon</b> &nbsp;·&nbsp; IIT Bhubaneswar &nbsp;·&nbsp; Round 1</div>
+    <div class="cover-mid">
+      <h1>Procurix</h1>
+      <p class="one">You say what you need to buy. It <b>emails your suppliers, reads their quotes, and tells you which to take and why</b> — then makes sure you pay on time, because in India paying a small supplier late now costs you tax.</p>
+      <div class="proof">
+        <span class="hot">Working software</span>
+        <span>LangGraph + Gemini</span>
+        <span>17 agent tools</span>
+        <span>Section 43B(h) compliance engine</span>
+        <span>Live reverse auctions</span>
+      </div>
+    </div>
+    <div class="foot">
+      <div><span class="lbl">Team</span><b>KB Innovator</b></div>
+      <div><span class="lbl">Nikhil Yadav</span>IIIT Ranchi</div>
+      <div><span class="lbl">Kaushik Shahare</span>Parul University</div>
+      <div class="gh"><span class="lbl">Working code</span><a href="https://github.com/NikhilYadav04/procurv_ai">github.com/NikhilYadav04/procurv_ai</a></div>
+    </div>
+    <span class="pnum">01</span>
+  </section>
+
+  <!-- 2 ................................................. -->
+  <section class="slide">
+    <div class="eyebrow">Problem statement</div>
+    <h2 class="big">Buying is still email.<br>And since 2023, paying late is a tax event.</h2>
+
+    <div class="cols two">
+      <div>
+        <h3 class="mid">Five suppliers, five formats, one spreadsheet</h3>
+        <div class="flow" style="margin-bottom:14px">
+          <div class="st"><span class="n">01</span><span class="t">Write requirement</span></div>
+          <div class="st brk"><span class="n">02</span><span class="t">Quotes back</span></div>
+          <div class="st brk"><span class="n">03</span><span class="t">Compare</span></div>
+          <div class="st"><span class="n">04</span><span class="t">Award &amp; PO</span></div>
+          <div class="st brk"><span class="n">05</span><span class="t">Invoice</span></div>
+          <div class="st"><span class="n">06</span><span class="t">Pay</span></div>
+        </div>
+        <p style="font-size:13.5px;color:var(--ink2);margin:0;line-height:1.45">A PDF, a photographed letterhead, four lines in a mail body. Retyped by hand.</p>
+
+        <h3 class="mid" style="margin:16px 0 0">What one purchase costs today</h3>
+        <div class="costs">
+          <div class="cost"><i>5 mails</i><span>Written one at a time, each with the specification pasted in again</span></div>
+          <div class="cost"><i>2 weeks</i><span>Waiting, then chasing the three who did not reply</span></div>
+          <div class="cost"><i>by hand</i><span>Every quote retyped into a spreadsheet to line them up</span></div>
+          <div class="cost"><i>not comparable</i><span>“Net 30” against “50% advance” — so terms get ignored and price decides</span></div>
+          <div class="cost"><i>lost</i><span>Why that supplier was chosen. It leaves with the inbox</span></div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="mid">Section 43B(h), Income Tax Act</h3>
+        <div class="law">
+          <div class="lrow"><b>45 days</b><span>Maximum you may take to pay a Udyam-registered micro or small supplier</span></div>
+          <div class="lrow"><b>15 days</b><span>If no written payment term exists — which is most SME buying</span></div>
+          <div class="lrow"><b>3× bank rate</b><span>Interest, compounded monthly, and itself non-deductible</span></div>
+          <div class="lrow"><b>Deduction</b><span>Moves to the year you actually pay. Not forgiven — deferred</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tape">Nothing happens on day 46. The firm finds out at audit, ten months later, when nothing can be done.</div>
+    <span class="pnum">02</span>
+  </section>
+
+  <!-- 3 ................................................. -->
+  <section class="slide">
+    <div class="cols narrow-wide">
+      <div>
+        <div class="eyebrow">Target users</div>
+        <h2 class="big" style="font-size:clamp(22px,2.6vw,30px);margin-bottom:14px">The person who <em style="font-style:italic;color:var(--rust)">is</em> the procurement department</h2>
+
+        <div class="ucard">
+          <div class="r">Primary</div>
+          <h4>The SME buyer</h4>
+          <p>₹5 Cr – ₹500 Cr turnover. Construction, manufacturing, facilities, hospitality. One or two people, often the founder or a site engineer. No procurement software — Ariba and Coupa are built and priced for enterprises.</p>
+        </div>
+        <div class="ucard">
+          <div class="r">Benefits without using it</div>
+          <h4>The MSME supplier</h4>
+          <p>Never logs in. Replies to email, or opens an auction link. Gets paid on time because their buyer can finally see the deadline.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fct"><i>They buy</i><span>Steel, furniture, fasteners, safety gear, site consumables — repeat categories, not one-offs</span></div>
+          <div class="fct"><i>How often</i><span>Several orders a week, every week</span></div>
+          <div class="fct"><i>Suppliers</i><span>20 to 100 on the books, most of them small local firms — so MSME exposure is the norm, not the exception</span></div>
+          <div class="fct"><i>Today</i><span>Email, Excel, and one person's memory</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Why it must be agentic</div>
+        <h2 class="big" style="font-size:clamp(22px,2.6vw,30px);margin-bottom:16px">Three properties defeat a form, a workflow engine, and a chatbot</h2>
+
+        <div class="args">
+          <div class="arg">
+            <div class="k">1</div>
+            <div>
+              <h4>You don't control the input</h4>
+              <p>Quotes arrive as scans and photographs. Portals fix this by making the supplier fill a form first — <b>which is exactly why they never reach Indian SMEs.</b> An agent reads whatever arrives. The mess is the reason it must be a model.</p>
+            </div>
+          </div>
+          <div class="arg">
+            <div class="k">2</div>
+            <div>
+              <h4>It's a chain, not a transaction</h4>
+              <p>One sentence expands into eight steps spread over days. A revised price, a missing delivery date, a vendor replying late — <b>the branches are not a closed set</b>, so they cannot be declared in advance.</p>
+            </div>
+          </div>
+          <div class="arg">
+            <div class="k">3</div>
+            <div>
+              <h4>The criteria change every time</h4>
+              <p>Cheapest is not best. This month delivery decides it, next month payment terms. And always: <b>is this supplier MSME</b> — because that sets when you are legally obliged to pay.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scope">
+          <b>Not for:</b> large enterprises already running a procure-to-pay suite, government tendering, or consumer buying. The wedge is firms whose statutory obligation is identical to an enterprise's but who have no system at all.
+        </div>
+      </div>
+    </div>
+    <span class="pnum">03</span>
+  </section>
+
+  <!-- 4 ................................................. -->
+  <section class="slide">
+    <div class="eyebrow">Proposed solution</div>
+    <h2 class="big">One chat box runs the loop, and keeps the record it currently loses.</h2>
+
+    <div class="flow" style="margin-bottom:18px">
+      <div class="st ok"><span class="n">01</span><span class="t">Describe it</span></div>
+      <div class="st ok"><span class="n">02</span><span class="t">RFP drafted &amp; sent</span></div>
+      <div class="st ok"><span class="n">03</span><span class="t">Quotes read from email</span></div>
+      <div class="st ok"><span class="n">04</span><span class="t">Ranked on your weights</span></div>
+      <div class="st ok"><span class="n">05</span><span class="t">Award, PO issued</span></div>
+      <div class="st ok"><span class="n">06</span><span class="t">Clock watched to payment</span></div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-row typed">
+        <div class="lbl">You type</div>
+        <div class="out">“I need 250 workstation desks — get quotes from Kumar, Rapid and Godrej”</div>
+      </div>
+      <div class="demo-row">
+        <div class="lbl">It does</div>
+        <div class="out"><span class="seq">1</span> writes the RFP and numbers it &nbsp;<span class="seq">2</span> emails all three from your Gmail &nbsp;<span class="seq">3</span> reads the PDFs they send back &nbsp;<span class="seq">4</span> ranks them</div>
+      </div>
+      <div class="demo-row">
+        <div class="lbl">It says</div>
+        <div class="out">“<b>Kumar ₹31.2 L</b> but 45 days out. <b>Rapid ₹33.5 L</b> in 21 days, wants half up front. <b>Godrej ₹34.8 L</b>, dearest, longest warranty.”</div>
+      </div>
+      <div class="demo-row result">
+        <div class="lbl">You do</div>
+        <div class="out">Raise the delivery weight → ranking flips to Rapid → award → purchase order issued</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="askhead">Or just ask it</div>
+      <div class="asks">
+        <span>“What quotes are waiting on me?”</span>
+        <span>“Am I at risk on any MSME payments?”</span>
+        <span>“Draft a counter-offer to Godrej”</span>
+        <span>“Start a reverse auction for the desks”</span>
+        <span>“Record the invoice for PO-9005”</span>
+        <span>“Add these 12 vendors”</span>
+        <span>“Generate this month's report”</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>17</b><span>agent tools</span></div>
+      <div class="stat"><b>28</b><span>API routes</span></div>
+      <div class="stat"><b>12</b><span>screens</span></div>
+      <div class="stat"><b>13</b><span>database tables</span></div>
+      <div class="stat"><b>Live</b><span>working software, not a concept</span></div>
+    </div>
+    <span class="pnum">04</span>
+  </section>
+
+  <!-- 5 ................................................. -->
+  <section class="slide" id="s5">
+    <div class="eyebrow">System architecture</div>
+    <h2 class="big" style="font-size:clamp(24px,3vw,36px);margin-bottom:14px">The agent decides. Deterministic code computes.</h2>
+
+    <div class="arch">
+      <div class="lay">
+        <div class="nm"><em>Client</em>Browser</div>
+        <div class="ds">Chat with streamed tool activity · weighted comparison · MSME radar with live countdown · buyer auction console · token-based vendor bidding page, no account needed &nbsp; <span class="mono" style="color:var(--ink3);font-size:11px">Next.js 16 · React 19 · Tailwind</span></div>
+      </div>
+      <div class="arrow">▼ &nbsp; server-sent events + REST</div>
+      <div class="lay">
+        <div class="nm"><em>Transport</em>API — 28 routes</div>
+        <div class="ds">The chat route streams reasoning, each tool call and each result as they happen, so the UI shows work rather than a spinner</div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="lay hot">
+        <div class="nm"><em>Core</em>Agent runtime</div>
+        <div class="ds"><b>LangGraph over Gemini.</b> Plans → selects a tool → executes → observes → loops. A checkpointer holds state per thread, so Monday's requirement is still context on Thursday &nbsp; <span class="mono" style="font-size:11px">zod-typed tool contracts</span></div>
+      </div>
+      <div class="arrow">▼ &nbsp; 17 tools</div>
+      <div class="lay">
+        <div class="nm"><em>Capability</em>Tool layer</div>
+        <div class="ds">RFP drafting · email · quote inbox · MSME compliance · negotiation · auctions · vendor master · company profile · reporting</div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="lay hot">
+        <div class="nm"><em>Trust boundary</em>Deterministic engines</div>
+        <div class="ds"><b>Pure functions, no model in the path.</b> Weighted scoring normalised across bids received · 43B(h) assessment deriving each deadline from the agreed terms · full GSTIN validation including the mod-36 check digit, catching a fake number offline · PDF generation</div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="trio">
+        <div class="lay"><div class="nm"><em>Model</em>Gemini</div><div class="ds">Agent reasoning, and vision for reading quotes from PDFs and photographs</div></div>
+        <div class="lay"><div class="nm"><em>Identity &amp; mail</em>Google</div><div class="ds">OAuth sign-in, separate Gmail consent, tokens refreshed automatically</div></div>
+        <div class="lay"><div class="nm"><em>State</em>Supabase</div><div class="ds">Postgres, 13 tables, row-level security</div></div>
+      </div>
+
+      <div class="prin" style="margin-top:9px">
+        <div class="pr"><b>The model never computes a rupee</b><span>Scoring and compliance are plain functions. A figure on screen cannot be hallucinated, because no model produced it.</span></div>
+        <div class="pr"><b>It refuses to invent</b><span>Temperature zero, strict schema, null for anything absent — never a plausible guess. Savings claimed only where a losing quote exists.</span></div>
+        <div class="pr"><b>The human awards</b><span>The agent ranks, explains and drafts. It does not commit money or send a negotiation unapproved.</span></div>
+      </div>
+    </div>
+    <span class="pnum">05</span>
+  </section>
+
+  <!-- 6 ................................................. -->
+  <section class="slide">
+    <div class="eyebrow">Expected impact</div>
+    <h2 class="big">Measured, not projected.</h2>
+
+    <div class="cols two">
+      <div>
+        <h3 class="mid">Buying on merit, not on the first reply</h3>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Requirement</th><th class="n">Highest</th><th class="n">Awarded</th><th class="p">Saved</th></tr></thead>
+            <tbody>
+              <tr><td>120 storage racks</td><td class="n">₹21.20 L</td><td class="n">₹18.40 L</td><td class="p">13.2%</td></tr>
+              <tr><td>Fasteners contract</td><td class="n">₹10.85 L</td><td class="n">₹9.60 L</td><td class="p">11.5%</td></tr>
+              <tr><td>500 chairs</td><td class="n">₹26.10 L</td><td class="n">₹24.50 L</td><td class="p">6.1%</td></tr>
+              <tr><td>250 desks <em>(auction)</em></td><td class="n">₹34.80 L</td><td class="n">₹30.12 L</td><td class="p">13.4%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12.5px;color:var(--ink3);margin:8px 0 0;line-height:1.4">Difference between the winning and highest quote on the same requirement, from the running system.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column">
+        <h3 class="mid">The exposure nobody sees until it is permanent</h3>
+        <div class="hero-num">
+          <b>₹4,60,000</b>
+          <span>Tax falling due this year on one unpaid ₹18.40 L invoice to a micro supplier, past its 30-day term — plus interest at 3× the bank rate, compounded, non-deductible.</span>
+        </div>
+        <div class="tape calm" style="margin-top:10px">The remedy costs nothing. Pay on day 44 instead of day 46. The entire value is that somebody knew.</div>
+        <p style="font-size:13.5px;color:var(--ink2);margin:14px 0 0;line-height:1.45">43B(h) binds every Indian buyer with MSME suppliers from FY 2023–24. Enterprises absorbed it through existing systems. The firms most exposed absorbed nothing, because nothing was built for them.</p>
+      </div>
+    </div>
+
+    <div class="limits"><b>What we have not solved:</b> we do not discover suppliers — vendors are added by the buyer. GSTIN structure and check digits are validated offline, but live registry verification is not yet wired, so MSME status is recorded rather than proven, and the interface says so. Nothing runs on a schedule yet; a background watcher on the inbox and the payment clock is next.</div>
+    <span class="pnum">06</span>
+  </section>
+
+</div>

@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cleanup-pdfs",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

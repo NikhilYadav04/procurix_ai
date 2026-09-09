@@ -1,0 +1,31 @@
+=== Kickbacks.ai Diagnostics ===
+extension version: 2.6.6
+build: build 2026-09-02T06:08:53Z (5d ago)  (BUILD_TS=2026-09-02T06:08:53Z)
+debug enabled: true
+debug log: C:\Users\DELL\.kickbacks\debug.log
+
+--- Claude Code ---
+target: C:\Users\DELL\.vscode\extensions\anthropic.claude-code-2.1.263-win32-x64\webview\index.js
+target exists: true
+CC version: 2.1.263
+PREFLIGHT compatible: true
+patch live (isPatched): false
+backup: exists=false hasArray=false hasBlock=false
+live: hasArray=true bareVerbPresent=true
+
+VERDICT: OK — Claude Code is patchable (block not applied yet this session).
+
+--- Codex ---
+Codex (openai.chatgpt) not found on this machine.
+
+--- Cursor (in-composer overlay) ---
+opted in: false
+target: C:\Users\DELL\AppData\Local\Programs\cursor\resources\app\out\vs\code\electron-sandbox\workbench\workbench.html
+target exists: true
+Cursor version: 2.6.13 (60faf7b5)
+PREFLIGHT compatible: true
+patch live (isPatched): false
+backup: exists=false hasShape=false hasBlock=false
+live: hasShape=true
+
+VERDICT: Cursor detected but the in-composer overlay is RETIRED — patching Cursor's own bundle is disabled in every build (macOS code-signature risk). Kickbacks.ai still serves its other surfaces in Cursor; any old overlay patch is auto-removed on activation.
