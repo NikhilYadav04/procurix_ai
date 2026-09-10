@@ -800,7 +800,7 @@ const DemoVideo = () => {
         >
           <div className="relative aspect-video w-full">
             <iframe
-              src="https://www.youtube.com/embed/jzp-LK5PZCg?rel=0&modestbranding=1"
+              src="https://www.youtube.com/embed/i7kpz78zU34?rel=0&modestbranding=1"
               title="Procurix product demo"
               loading="lazy"
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

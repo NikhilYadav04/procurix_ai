@@ -1,5 +1,5 @@
 # Procurix - AI-Powered Procurement Platform
-watch demo - https://youtu.be/jzp-LK5PZCg
+watch demo - https://youtu.be/i7kpz78zU34
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ba47d007-403a-4ce6-9001-9d2039623b4c" />
 
