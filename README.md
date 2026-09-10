@@ -21,9 +21,9 @@ paying a small supplier late now costs you the tax deduction.
 
 <br>
 
-<a href="https://youtu.be/jzp-LK5PZCg"><img width="720" alt="Watch the Procurix demo" src="https://img.youtube.com/vi/jzp-LK5PZCg/maxresdefault.jpg"></a>
+<a href="https://youtu.be/i7kpz78zU34"><img width="720" alt="Watch the Procurix demo" src="https://img.youtube.com/vi/i7kpz78zU34/maxresdefault.jpg"></a>
 
-<p><b>▶ <a href="https://youtu.be/jzp-LK5PZCg">Watch the demo</a></b></p>
+<p><b>▶ <a href="https://youtu.be/i7kpz78zU34">Watch the demo</a></b></p>
 
 <br>
 
@@ -144,5 +144,5 @@ src/lib/              deterministic engines — scoring, MSME compliance, GSTIN,
 src/components/       UI, quote comparison, MSME radar, auction feed
 database/             schema, applied in order
 scripts/              reset, seed and verify the demo
-docs/                 technical documentation and the Round 1 brief
+docs/                 technical documentation, the Round 1 brief, the demo script
 ```
