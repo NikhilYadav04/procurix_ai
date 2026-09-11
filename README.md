@@ -106,32 +106,136 @@ Where competition beats negotiation, the same suppliers can bid the price down i
 
 ## Run it locally
 
+The UI and the agent are **one Next.js app**. There is no separate backend to start — `npm run dev` runs both.
+
+### What you need first
+
+| | Why | Where |
+|---|---|---|
+| **Node.js 22 LTS** | Next 16 and React 19 need it | [nodejs.org](https://nodejs.org) |
+| **A Supabase project** | Postgres, 13 tables — free tier is enough | [supabase.com](https://supabase.com) |
+| **A Gemini API key** | The model behind the agent | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
+| **A Google Cloud project** | Login, and Gmail sending | [console.cloud.google.com](https://console.cloud.google.com) |
+
+### 1. Install
+
 ```bash
+git clone https://github.com/NikhilYadav04/procurix_ai.git
+cd procurv_ai
 npm install
-cp .env.example .env.local     # fill in the values
-npm run dev                    # http://localhost:3000
 ```
 
-You will need a Supabase project, a Google OAuth client (with Gmail scope) and a Gemini API key. Every variable is listed in [the technical documentation](docs/TECHNICAL.md#environment-variables).
+`npm install` prints `EBADENGINE` warnings and a list of audit vulnerabilities. That is expected — they sit in build-time dependencies, not in anything the running app reaches. **Do not run `npm audit fix --force`**; it bumps `next` and `langchain` across major versions and breaks the build.
 
-**To load the demo data:**
+### 2. Create the database
+
+In your Supabase project open **SQL Editor** and run each file from [database/](database/) **in this order** — later tables reference earlier ones.
+
+```
+1. userprofile-setup.sql             users, from Google login
+2. customers-setup.sql               plans and credits
+3. auctions-setup.sql                auctions, bids, vendors, invitations
+4. auction-documents-setup.sql       files attached to auctions
+5. auction-documents-update.sql      moves that storage to base64
+6. integrations-setup.sql            Gmail OAuth tokens
+7. rfp-counter-setup.sql             RFP numbering — RFP-0001
+8. vendors-customer-association.sql  ties vendors to the customer who owns them
+```
+
+Then **Storage → New bucket** → name it `reports`. Executive report PDFs are uploaded there; without it, report generation fails.
+
+### 3. Get the Google credentials
+
+One Google Cloud project does two jobs — login, and Gmail sending.
+
+1. **APIs & Services → Library** → enable **Gmail API**.
+2. **Credentials → Create credentials → OAuth client ID → Web application.**
+3. Add **both** of these as authorized redirect URIs — they are two separate consent flows and you need both:
+   ```
+   http://localhost:3000/api/auth/google/callback
+   http://localhost:3000/api/auth/google/gmail/callback
+   ```
+4. **OAuth consent screen → Test users** → add your own Gmail address, or Google will block the login.
+
+Copy the client ID and client secret.
+
+### 4. Fill in the environment
 
 ```bash
-node scripts/seed-demo.js --reset    # 7 vendors, 5 RFPs, 8 POs, 2 live auctions
-npx tsx scripts/verify-demo.ts       # 37 checks against the app's own logic
+cp .env.example .env.local
 ```
 
-The seed builds a working procurement history: three quotes waiting on a live comparison, a purchase order eleven days past its MSME deadline, and a reverse auction mid-flight. Dates are relative to when you run it, so reseed before a demo.
+The required values:
 
----
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
+SUPABASE_REPORTS_BUCKET=reports
 
-## What it does not do
+GOOGLE_API_KEY=...                  # Gemini, from AI Studio
 
-Worth saying plainly.
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=xxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_ID=xxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=...
+NEXT_PUBLIC_REDIRECT_URI=http://localhost:3000/api/auth/google/callback
+GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/google/gmail/callback
+JWT_SECRET=any-long-random-string
 
-- **It does not find suppliers.** There is no discovery or marketplace. Vendors are added by the user.
-- **GSTIN is validated, not looked up.** The full mod-36 check digit is verified offline, so an invented number is caught with no API call — but the live government registry lookup needs credentials that are not configured, so a supplier's MSME status is *recorded*, not *proven*. The interface says so rather than assuming.
-- **Nothing runs on a schedule.** Quote syncing, compliance checks and reports run when asked. A background watcher on the inbox and the payment clock is the next thing to build.
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:3000
+NEXT_PUBLIC_DEMO_MODE=true          # unlimited credits, no upgrade modal
+```
+
+Two things that catch people out. `GOOGLE_CLIENT_ID` and `NEXT_PUBLIC_GOOGLE_CLIENT_ID` hold the **same value** — one is read on the server, one in the browser, and both must be set. And `GOOGLE_API_KEY` appears nowhere in the code: LangChain reads it from the environment by that exact name, so a typo makes the agent fail silently. Payments and analytics are optional; leave them blank.
+
+Next.js does not hot-reload env files — restart the dev server after editing.
+
+### 5. Run it
+
+```bash
+npm run dev        # http://localhost:3000
+```
+
+```bash
+npm run build      # production build
+npm start          # serve that build
+npm run lint       # eslint
+```
+
+### 6. First run, in order
+
+1. Open [localhost:3000](http://localhost:3000) → **Login with Google** → finish onboarding.
+2. **Settings → Integrations → Connect Gmail.** This is a *different* consent screen from the login. Skip it and every email the agent sends will fail.
+3. Type into the chat: `Add vendor test@example.com`, then `Create an RFP for 100 office chairs`.
+
+Vendors saving means the database is wired. A PDF appearing means the agent and its tools are working. An email arriving means Gmail is connected.
+
+### 7. Load the demo data
+
+```bash
+node scripts/seed-demo.js --reset you@gmail.com   # the email you logged in with
+npx tsx scripts/verify-demo.ts                    # 37 checks against the app's own logic
+```
+
+Pass the Google address you signed in with — the seed attaches everything to that customer, and without it the data lands on someone else's account and the dashboard looks empty.
+
+It builds a working procurement history: 7 vendors, 5 RFPs, 8 purchase orders, three quotes waiting on a live comparison, one PO eleven days past its MSME deadline, and a reverse auction mid-flight. Dates are relative to the moment you run it, so reseed before a demo.
+
+`node scripts/verify-db.js` checks the schema itself if something looks wrong, and `node scripts/reset-db.js --yes` clears the transactional tables while leaving your login intact.
+
+### If it does not work
+
+| Symptom | Cause |
+|---|---|
+| Agent replies but never calls a tool | `GOOGLE_API_KEY` missing or misspelled — restart after fixing |
+| `redirect_uri_mismatch` on login | The URI in Google Cloud must match `.env.local` exactly; both callbacks are needed |
+| Emails fail silently | Gmail not connected — Settings → Integrations. Logging in is not the same thing |
+| Report PDFs fail | The `reports` storage bucket does not exist in Supabase |
+| "Insufficient credits" | Set `NEXT_PUBLIC_DEMO_MODE=true`, or set the customer's credit columns to `-1` |
+| `npm install` fails on `chartjs-node-canvas` | Native build tools missing — `npm install --ignore-scripts` is fine, it is only used for report charts |
+
+Longer walkthrough, including deployment: [START.md](START.md) and [the technical documentation](docs/TECHNICAL.md#environment-variables).
 
 ---
 
